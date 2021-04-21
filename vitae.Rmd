@@ -1,0 +1,135 @@
+
+---
+name: 권태혁(Taehyuk, Kwon)
+surname:
+position: "S&T / Industry Policy researcher based on data science"
+address: "101-1103, Suji-ro 487, Suji-gu, Yongin, Gyeongi, Rep. of Korea"
+phone: (+82) 10-8864-4561
+email: "supworld@hanmail.net"
+github: th-tgoon
+date: "`r format(Sys.time(), '%B %Y')`"
+header-includes:
+  - \usepackage{kotex}
+output: vitae::hyndman
+      pdf_document:
+mainfont: NanumBarunpen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+library(tidyr)
+```
+
+# 학교 및 자격증
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Bachelor of Economics(Applied Statistics)", "2004", "Yonsei Univ.", "Seoul, S. Korea",
+  "Master of Science in Applied Statistics", "2010", "Yonsei Univ.", "Seoul, S. Korea",
+  "Ph D. in Pubic administration(S&T Policy)", "2020", "Hanyang Univ.", "Seoul, S. Korea"
+  
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```  
+
+# 경력
+
+```{r}
+tribble(
+  ~Year, ~Type, ~Desc,
+  "2005 ~ 2008", "Repulbic of Korea Navy", "Supply officer of 1st Fleet and Logistic Command ",
+  "2010 ~ 2011", "Lotte Insurance Co. Ltd", "Actuarial Science, Data analysis",
+  "2011 ~ 2015", "KRISS", "Mega R&D Project Planning, Developing Long-mid term R&D strategy & Standard Policy research",
+  "2014 ~ 2015", "KISTEP", "National R&D Project Meta Evaluation, R&D evaluation Index development, Technical evaluation for Preliminary feasibility Study of National R&D project",
+  "2015 ~ 2021", "KHIDI", "Econmic feasibility analysis for public healthcare project, Heathcare technology forecasting, Health industry Policy Planning, S&T policy research and economic evaluation"
+) %>% 
+  brief_entries(
+    Type,
+    Year, 
+    Desc
+  )
+```
+
+# 논문
+
+```{r}
+bibliography_entries("taehyukKwon.bib")
+```
+
+
+
+# Presentation
+ 
+```{r vitae-presentation}
+ resume_df %>% 
+   select(발표) %>% 
+   unnest() %>% 
+   detailed_entries(발표제목, 발표일)
+```
+
+
+# Summary
+
+```{r resume-summary}
+resume_df %>% 
+  select(요약) %>% 
+  unnest() %>% 
+  brief_entries(요약)
+```
+
+# Work Experience
+
+```{r vitae-work}
+resume_df %>% 
+  select(직장) %>% 
+  unnest() %>% 
+  detailed_entries(with=직장명, where=근무지, what=역할, when=근무연도)
+```
+
+<!-- # Honors & Awards -->
+
+<!-- ```{r vitae-honors} -->
+<!-- resume_df %>%  -->
+<!--   select(수상) %>%  -->
+<!--   unnest() %>%  -->
+<!--   detailed_entries(when=수상년도, 수상등수, 수상프로그램, 수상지역) -->
+<!-- ``` -->
+
+# Presentation
+
+```{r vitae-presentation}
+resume_df %>% 
+  select(발표) %>% 
+  unnest() %>% 
+  detailed_entries(발표제목, 발표일)
+```
+
+# Writing
+
+```{r vitae-writing}
+resume_df %>% 
+  select(저서) %>% 
+  unnest() %>% 
+  detailed_entries(저서명, what=저자명, when=저작연도)
+```
+
+
+# Education
+
+```{r vitae-education}
+resume_df %>% 
+  select(학교) %>% 
+  unnest() %>% 
+  detailed_entries(학교명, 학교위치)
+```
+
+# Extracurricular Activity
+
+```{r extra-curricular}
+resume_df %>% 
+  select(특활) %>% 
+  unnest() %>% 
+  detailed_entries(with=특활명, where=특활지역, what=특활역할, when=특활기간)
